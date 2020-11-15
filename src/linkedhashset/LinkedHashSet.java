@@ -1,15 +1,11 @@
 package linkedhashset;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 public class LinkedHashSet implements Set {
 	
 	private class Node {
 		/**
 		 * @invar | (element == null) == (this == sentinel)  
 		 * @invar | previous != null
-		 * @invar | next != null
 		 * @invar | next.previous == this
 		 * @invar | previous.next == this
 		 * 
@@ -20,37 +16,43 @@ public class LinkedHashSet implements Set {
 		/** @peerObject */
 		private Node next;
 		
-		private int getLength() { return this == sentinel ? 0 : 1 + next.getLength(); }
+		//private int getLength() { return this == sentinel ? 0 : 1; }
 	}
 	
 	/**
 	 * @invar | sentinel != null
-	 * @invar | size == sentinel.next.getLength()
+	 * @invar | size >= 0
 	 */
 	private int size;
 	/** @representationObject */
 	private Node sentinel;
+// not needed since objects will only be added to end of list	
+//	private Node getNode(int index) {
+//		Node node = sentinel;
+//		if (index <= size / 2)
+//			for (; index >= 0; index--)
+//				node = node.next;
+//		else
+//			for (; index < size; index++)
+//				node = node.previous;
+//		return node;
+//	}
 	
-	private Node getNode(int index) {
-		Node node = sentinel;
-		if (index <= size / 2)
-			for (; index >= 0; index--)
-				node = node.next;
-		else
-			for (; index < size; index++)
-				node = node.previous;
-		return node;
+	
+	public LinkedHashSet() {
+		sentinel = new Node();
+		sentinel.previous = sentinel;
+		sentinel.next = sentinel;
 	}
-	
-	// HashMap
 	HashMap map = new HashMap(20);
+	
 	
 	@Override
 	// not possible in constant time
 	public Object[] toArray() {
 		Object[] result = new Object[size];
 		int i = 0;
-		for (Node node = sentinel.next; node != sentinel; node = node.next)
+		for (Node node = sentinel.next; node != null; node = node.next)
 			result[i++] = node.element;
 		return result;
 	}
