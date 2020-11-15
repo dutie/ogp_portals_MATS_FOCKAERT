@@ -53,7 +53,7 @@ public class ArrayMap implements Map {
 
 	// self written
 	public boolean contains(Object object) {
-		entries.contains(object);
+		return entries.contains(object);
 	}
 	
 

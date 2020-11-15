@@ -62,7 +62,7 @@ public class LinkedHashSet implements Set {
 
 	@Override
 	public boolean contains(Object value) {
-		map.contains(value);
+		return map.contains(value);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class LinkedHashSet implements Set {
 
 	@Override
 	public void remove(Object object) {
-		Node node = map.get(object);
+		Node node = (Node) map.get(object);
 
 		if (node.previous == null) {
 			node.next.previous = null;

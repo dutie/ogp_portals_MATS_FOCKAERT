@@ -95,4 +95,6 @@ public interface Map {
 	 */
 	void remove(Object key);
 
+	boolean contains(Object object);
+
 }
