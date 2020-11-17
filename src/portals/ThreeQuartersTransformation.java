@@ -12,7 +12,7 @@ public class ThreeQuartersTransformation implements Transformation{
 	/**
 	 * Returns a size of an object scaled by the portal's transformation
 	 * 
-	 * @pre  | 0 < objSize
+	 * @pre  | 0 <= objSize
 	 * 
 	 * @post | result == Math.round(objSize * getFraction())
 	 */
